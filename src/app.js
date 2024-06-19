@@ -38,4 +38,9 @@ app.get('/items', (req, res) => {
     res.status(httpStatus.OK).send(items)
 })
 
+app.get('/items/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    res.status(httpStatus.OK).send(items.find(elm => elm.id === id))
+})
+
 app.listen(5000, () => console.log('Server is running on port 5000'));
