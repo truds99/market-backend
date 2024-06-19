@@ -39,8 +39,17 @@ app.get('/items', (req, res) => {
 })
 
 app.get('/items/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    res.status(httpStatus.OK).send(items.find(elm => elm.id === id))
+    const id = Number(req.params.id);
+    if (isNaN(id) || id < 1 || id % 1) {
+        res.sendStatus(httpStatus.BAD_REQUEST);
+        return;
+    }
+    const item = items.find(elm => elm.id === id);
+    if (!item) {
+        res.sendStatus(httpStatus.NOT_FOUND);
+        return;
+    }
+    res.status(httpStatus.OK).send(item);
 })
 
 app.listen(5000, () => console.log('Server is running on port 5000'));
