@@ -29,4 +29,8 @@ app.post('/items', (req, res) => {
     res.status(httpStatus.CREATED).send(item); 
 });
 
+app.get('/items', (req, res) => {
+    res.status(httpStatus.OK).send(items)
+})
+
 app.listen(5000, () => console.log('Server is running on port 5000'));
