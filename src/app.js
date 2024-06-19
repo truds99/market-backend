@@ -30,6 +30,11 @@ app.post('/items', (req, res) => {
 });
 
 app.get('/items', (req, res) => {
+    const { type } = req.query;
+    if (type) {
+        res.status(httpStatus.OK).send(items.filter(elm => elm.type === type));
+        return;
+    }
     res.status(httpStatus.OK).send(items)
 })
 
